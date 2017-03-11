@@ -142,7 +142,7 @@ if [ "$1" = "--init" ]; then
 	exit 0
 fi
 
-context="$(acquire .context)"
+context="$(findup .context)"
 if [ "$CONTEXT" -a ! "$CONTEXT/.context" -ef "$context" ]; then
 	echo >&2 "$0: Warning: active context differs directory context."
 	echo >&2 "$0: Directory context will be applied but non-overridden"
