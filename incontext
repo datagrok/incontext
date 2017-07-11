@@ -13,10 +13,12 @@
 # License: AGPLv3+ http://www.gnu.org/licenses/agpl.html
 #
 
+argv0="${0##*/}"
+
 usage(){ cat <<- USAGE >&2
 	Usage:
-		$0 --init
-		$0 [COMMAND [ARG...]]
+	    ${argv0} --init
+	    ${argv0} [COMMAND [ARG...]]
 
 	Executes COMMAND with ARGs in an environment modified by a .context file in
 	this or an ancestor directory.
@@ -45,14 +47,18 @@ usage(){ cat <<- USAGE >&2
 # TO DO
 #
 # -C option for starting context search at different directory
+# -C option to --init to create context in different directory
 # -n option for searching set of default paths for a context directory
 
-if [ "$1" = "--init" ]; then
+if [ "$1" = "--help" ]; then
+	usage
+	exit 0
+elif [ "$1" = "--init" ]; then
 	if [ -e ".context" ]; then
-		echo >&2 "$0: Error: A .context file already exists in this directory."
+		echo >&2 "$argv0: Error: A .context file already exists in this directory."
 		exit 1
 	fi
-	echo >&2 "$0: Creating .context file in current directory."
+	echo >&2 "$argv0: Creating .context file in current directory."
 	cat <<- EOF > .context
 		#!/bin/sh
 		
@@ -95,11 +101,11 @@ if [ "$1" = "--init" ]; then
 	# activate one.
 
 	if [ "$VIRTUAL_ENV" ]; then
-		echo >&2 "$0: There is an active virtualenv at $VIRTUAL_ENV. I'll activate it in the .context."
+		echo >&2 "$argv0: There is an active virtualenv at $VIRTUAL_ENV. I'll activate it in the .context."
 		venv="$VIRTUAL_ENV"
 		filter='cat'
 	elif [ -x bin/python -a -e lib/python*/site.py ]; then
-		echo >&2 "$0: This seems to be the root of a virtualenv. I'll activate it in the .context."
+		echo >&2 "$argv0: This seems to be the root of a virtualenv. I'll activate it in the .context."
 		venv="\$CONTEXT"
 		filter='cat'
 	else
@@ -144,19 +150,19 @@ fi
 
 context="$(findup .context)"
 if [ "$CONTEXT" -a ! "$CONTEXT/.context" -ef "$context" ]; then
-	echo >&2 "$0: Warning: active context differs directory context."
-	echo >&2 "$0: Directory context will be applied but non-overridden"
-	echo >&2 "$0: settings from active context will remain present."
-	echo >&2 "$0: Active context:    $CONTEXT/.context"
-	echo >&2 "$0: Directory context: $context"
+	echo >&2 "$argv0: Warning: active context differs directory context."
+	echo >&2 "$argv0: Directory context will be applied but non-overridden"
+	echo >&2 "$argv0: settings from active context will remain present."
+	echo >&2 "$argv0: Active context:    $CONTEXT/.context"
+	echo >&2 "$argv0: Directory context: $context"
 fi
 
 if [ -x "$context" ]; then
 	exec "$context" "${@:-$SHELL}"
 elif [ -e "$context" ]; then
-	echo >&2 "$0: Warning: found $context but it is not marked executable; running with current environment."
+	echo >&2 "$argv0: Warning: found $context but it is not marked executable; running with current environment."
 else
-	echo >&2 "$0: Warning: no context was found; running with current environment."
+	echo >&2 "$argv0: Warning: no context was found; running with current environment."
 fi
 
 exec "${@:-$SHELL}"
