@@ -83,6 +83,11 @@ Some tools incur a lot of complexity by supporting the syntax of a limited set o
 
 Some tools incur complexity by managing the setting and un-setting of environment variables in the user's current shell. Others eschew un-setting and allow environment settings to "leak" into other contexts when the user changes directories. `incontext` mostly avoids these problems by launching a subshell in a modified environment. Once the user exits the subshell, their original environment is restored.
 
+## Related
+
+- [git](https://git-scm.com/) marks its context with a `.git` directory, and performs context discovery to allow git commands to work in any subdirectory of a git clone.
+- [datagrok/subcommander](https://github.com/datagrok/subcommander) is an older tool of mine from which `incontext` was derived. A future rewrite will delegate its context discovery features to `incontext`.
+
 ## License: AGPL-3.0+ with additional permissions
 
 This software is copyright 2017 [Michael F. Lamb][] and released under the terms of the [GNU Affero General Public License, version 3][AGPL-3.0+] (or, at your option, any later version,) with a grant of additional permission that allows you to apply any terms you wish to the output `.context` file. For details, see [COPYING.md](COPYING.md).
