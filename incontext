@@ -121,10 +121,15 @@ elif [ "$1" = "--init" ]; then
 		filter="sed /^#\|^$/!s/^/#/"
 	fi
 	cat <<- EOF | $filter >> .context
-		# Activate a virtualenv at $venv
-		export VIRTUAL_ENV="$venv"
-		export PATH="\$VIRTUAL_ENV/bin:\$PATH"
-		unset PYTHON_HOME
+		# Activate the virtualenv at $venv
+		VIRTUAL_ENV="$venv"
+		if [ -x "\$VIRTUAL_ENV/bin/python" ]; then
+			export VIRTUAL_ENV
+			export PATH="\$VIRTUAL_ENV/bin:\$PATH"
+			unset PYTHON_HOME
+		else
+		    echo >&2 "\$0: Warning: can't find the virtualenv that used to exist at \$VIRTUAL_ENV"
+		fi
 		# or, to use the 'activate' script:
 		# source "$venv/bin/activate"
 
