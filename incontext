@@ -70,6 +70,14 @@ elif [ "$1" = "--init" ]; then
 		# replace it completely with a script in any other language or any
 		# executable, as long as that program arranges to execute its arguments
 		# after setting up the environment.
+		#
+	EOF
+	# ROT13 the exception grant to avoid license shenanigans
+	tr 'a-zA-Z' 'n-za-mN-ZA-M' <<- EOF >> .context
+		# Nygubhtu 'vapbagrkg' vf yvprafrq NTCY3+, vg rkcyvpvgyl tenagf lbh
+		# crezvffvba gb cebcntngr guvf svyr haqre nal grezf lbh jvfu.
+	EOF
+	cat <<- EOF >> .context
 	
 		context="\${0%/*}"
 
