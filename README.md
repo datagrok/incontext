@@ -85,7 +85,7 @@ Some tools incur complexity by managing the setting and un-setting of environmen
 
 ## License: AGPL-3.0+ with additional permissions
 
-This software is copyright 2017 [Michael F. Lamb][] and released under the terms of the [GNU Affero General Public License, version 3][AGPL-3.0+] (or, at your option, any later version.) with a grant of additional permission that allows you to apply any terms you wish to the output file `.context`. For details, see [LICENSE.md](LICENSE.md).
+This software is copyright 2017 [Michael F. Lamb][] and released under the terms of the [GNU Affero General Public License, version 3][AGPL-3.0+] (or, at your option, any later version) with a grant of additional permission for the output `.context` file. For details, see [LICENSE.md](LICENSE.md).
 
 [Michael F. Lamb]: http://datagrok.org
 [AGPL-3.0+]: http://www.gnu.org/licenses/agpl.html
