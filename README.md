@@ -67,7 +67,7 @@ When not given a command, `incontext` defaults to launching a sub-shell. So you 
 
 ## Dependencies
 
-[datagrok/findup](https://github.com/datagrok/findup): locates a given filename in the nearest ancestor directory.
+[datagrok/findup-sh](https://github.com/datagrok/findup-sh): locates a given filename in the nearest ancestor directory.
 
 ## Other tools like `incontext`
 
